@@ -1,0 +1,11 @@
+{{ define "title" }}
+    {{ T "pageNotFound" | printf "404 %v" }} - {{ .Site.Title }}
+{{ end }}
+
+{{ define "main" }}
+<div class="container text-center" style="padding: 4rem;">
+    <h1 id="error" class="error-text">Page not found &nbsp;</h1>
+    <p>:(</p>
+    <a href="javascript:void(0);" title="back" onclick="window.history.back();">back</a>
+</div>
+{{ end }}

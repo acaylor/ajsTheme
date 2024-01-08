@@ -1,0 +1,13 @@
+{{ $image := . }}
+<figure class="custom-image">
+  <img
+    class="img-fluid"
+    src="{{ $image.Destination | safeURL }}"
+    alt="{{ $image.Text | plainify }}"
+  />
+  {{ if $image.Title }}
+  <figcaption>{{ $image.Title }}</figcaption>
+  {{ else if $image.Text }}
+  <figcaption>{{ $image.Text }}</figcaption>
+  {{ end }}
+</figure>

@@ -1,0 +1,25 @@
+{{ define "title" }}{{ .Title }} - {{ .Site.Title }}{{ end }} {{ define "main"
+}}
+
+<main class="container">
+  <br /><br />
+
+  <div class="container">
+    <article class="blog-post">
+      <h1>{{ .Title }}</h1>
+      {{ partial "metadata.html" . }}
+      <div class="container">
+        <aside
+          class="bd-aside text-body-secondary align-self-start mb-3 mb-xl-5 px-2"
+        >
+          <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">On this page</h2>
+          <nav class="small" id="toc">{{ .TableOfContents }}</nav>
+        </aside>
+      </div>
+      <div class="container">{{ .Content }}</div>
+    </article>
+  </div>
+  {{ template "_internal/disqus.html" . }}
+</main>
+
+{{ end }}

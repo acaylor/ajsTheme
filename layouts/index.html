@@ -1,0 +1,44 @@
+{{ define "main" }}
+
+<div class="container" style="padding-top: 4rem">
+  <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
+    <div class="col-lg-6 px-0">
+      <h1 class="display-4 fst-italic">{{ .Site.Title }}</h1>
+      <p class="lead my-3">
+        This is a personal blog focused on computer software and hardware. Most
+        projects are implementing software and hardware for a homelab. What is a
+        homelab? I would say a homelab could be a single computer or dozens of
+        computers connected in a network. You can also integrate with computers
+        in the Cloud.
+      </p>
+      <p class="lead mb-0">
+        <a href="/about/#" class="text-body-emphasis fw-bold"
+          >Continue reading...</a
+        >
+      </p>
+    </div>
+  </div>
+  <div class="container">
+    <h2>Recent Posts</h2>
+    {{/* Posts */}}
+    {{/* Paginate */}}
+    {{ if .Pages }}
+    {{ $pages := where .Site.RegularPages "Type" "posts" }}
+    {{ with .Site.Params.list.paginate | default .Site.Params.paginate }}
+    {{ $pages = $.Paginate $pages . }}
+    {{ else }}
+    {{ $pages = .Paginate $pages }}
+    {{ end }}
+    {{ range $pages.Pages }}
+    <article>
+      <h4><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
+      <span>
+        {{ $.Site.Params.list.dateFormat | default "01-02-2006" | .Date.Format }}
+      </span>
+      <p>{{ .Summary }}</p>
+    </article>
+    {{ end }} {{ template "_internal/pagination.html" . }} {{ end }}
+  </div>
+</div>
+
+{{ end }}

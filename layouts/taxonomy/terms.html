@@ -1,0 +1,47 @@
+{{ define "main" }} {{ $taxonomies := .Data.Plural }} {{ $terms :=
+.Data.Terms.ByCount }} {{ $type := .Type }}
+<div class="container">
+  {{/* Title */}}
+  <h2>{{ .Title }}</h2>
+
+  {{/* Categories Page */}} {{ if eq $taxonomies "categories" }}
+  <div class="container">
+    {{ range $terms }} {{ $term := .Term }} {{ $pages := .Pages }} {{ with
+    $.Site.GetPage "taxonomy" (printf "%v/%v" $type $term) }}
+    <div class="carditem">
+      <div class="carditemwrapper">
+        <h3 class="carditemtitle">
+          <a href="{{ .RelPermalink }}">
+            <i class="far fafolder fafw" ariahidden="true"></i>&nbsp;{{
+            .Page.Title }}
+          </a>
+        </h3>
+        {{ range first 5 $pages }}
+        <article class="archiveitem">
+          <a href="{{ .RelPermalink }}" class="archiveitemlink">
+            {{ .Title }}
+          </a>
+        </article>
+        {{ end }} {{ if gt (len $pages) 5 }}
+        <span class="morepost">
+          <a href="{{ .RelPermalink }}" class="moresinglelink"
+            >{{ T "more" }} >></a
+          >
+        </span>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }} {{ end }}
+  </div>
+
+  {{/* Tag Cloud Page */}} {{ else if eq $taxonomies "tags" }}
+  <div class="container">
+    {{ range $.Site.Taxonomies.tags.ByCount }}
+    <a href="{{ .Page.RelPermalink }}"
+      >{{ .Page.Title }} <sup>{{ .Count }}</sup></a
+    >
+    {{ end }}
+  </div>
+  {{ end }}
+</div>
+{{ end }}

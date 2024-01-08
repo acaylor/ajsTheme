@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+  {{ partial "head.html" . }}
+  {{/* Load CSS styles */}}
+  {{ partial "styles.html" . }}
+  <body>
+    {{/* body content */}} {{ partial "header.html" . }}
+
+    <div class="container-md" style="padding-top: 4rem">
+      {{ block "main" . }}{{ end }}
+    </div>
+
+    {{ partial "footer.html" . }} {{/* Load JavaScript */}} {{
+    partial "assets.html" . }}
+  </body>
+</html>

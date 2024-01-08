@@ -1,0 +1,4 @@
+baseURL = "http://blog.example/"
+languageCode = "en-us"
+title = "Example Blog"
+theme = "ajsTheme"

@@ -1,0 +1,36 @@
+{{ partial "color-modes.html" }}
+
+<header>
+  <nav
+    class="navbar navbar-expand-md border-bottom border-body fixed-top bg-dark"
+    data-bs-theme="dark"
+  >
+    <div class="container-fluid d-flex align-items-center">
+      <a class="navbar-brand" href="/#">{{ .Site.Title }}</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbar0"
+        aria-controls="navbar0"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbar0">
+        {{ range .Site.Menus.main }}
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ .URL }}">
+              {{ $text := print .Name | safeHTML }} {{ $text }}
+            </a>
+          </li>
+        </ul>
+
+        {{ end }}
+      </div>
+    </div>
+  </nav>
+</header>

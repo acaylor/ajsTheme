@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="rounded text-body-emphasis bg-body-secondary">
+    {{ $dateTime := .PublishDate.Format "2006-01-02" }} {{ $dateFormat :=
+    .Site.Params.dateFormat | default "Jan 2, 2006" }}
+    <p>
+      date:
+      <time datetime="{{ $dateTime }}"
+        >{{ .PublishDate.Format $dateFormat }}</time
+      >
+    </p>
+
+    {{ with .Params.tags }}
+    <p>
+      tags: {{ range . }} {{ $href := print (absURL "tags/") (urlize .) }}
+      <a class="btn btn-sm btn-secondary" href="{{ $href }}">{{ . }}</a>
+      {{ end }}
+    </p>
+    {{ end }} {{ with .Params.categories }}
+    <p>
+      categories: {{ range . }} {{ $href := print (absURL "categories/") (urlize
+      .) }}
+      <a class="btn btn-sm btn-dark" href="{{ $href }}">{{ . }}</a>
+      {{ end }}
+    </p>
+    {{ end }}
+  </div>
+</div>

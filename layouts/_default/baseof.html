@@ -6,9 +6,9 @@
   <body>
     {{/* body content */}} {{ partial "header.html" . }}
 
-    <div class="container-md" style="padding-top: 4rem">
+    <main id="main-content" class="container-md" style="padding-top: 4rem">
       {{ block "main" . }}{{ end }}
-    </div>
+    </main>
 
     {{ partial "footer.html" . }} {{/* Load JavaScript */}} {{
     partial "assets.html" . }}

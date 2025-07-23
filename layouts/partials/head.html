@@ -1,7 +1,49 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  {{ $title := print .Site.Title " | " .Title }} {{ if .IsHome }}{{ $title =
-  .Site.Title }}{{ end }}
+  {{ $title := print .Site.Title " | " .Title }} {{ if .IsHome }}{{ $title = .Site.Title }}{{ end }}
   <title>{{ $title }}</title>
+  {{ with .Params.description }}
+    <meta name="description" content="{{ . }}" />
+  {{ else }}
+    <meta name="description" content="{{ .Site.Params.description }}" />
+  {{ end }}
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{ $title }}" />
+  <meta property="og:site_name" content="{{ .Site.Title }}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="{{ .Permalink | default .Site.BaseURL }}" />
+  {{ with .Params.description }}
+    <meta property="og:description" content="{{ . }}" />
+  {{ else }}
+    <meta property="og:description" content="{{ .Site.Params.description }}" />
+  {{ end }}
+  {{ with .Params.images }}
+    <meta property="og:image" content="{{ index . 0 }}" />
+  {{ else }}
+    {{ if .Site.Params.og_image }}
+      <meta property="og:image" content="{{ .Site.Params.og_image }}" />
+    {{ end }}
+  {{ end }}
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ $title }}" />
+  {{ with .Params.description }}
+    <meta name="twitter:description" content="{{ . }}" />
+  {{ else }}
+    <meta name="twitter:description" content="{{ .Site.Params.description }}" />
+  {{ end }}
+  {{ with .Site.Params.twitter_site }}
+    <meta name="twitter:site" content="@{{ . }}" />
+  {{ end }}
+  {{ with .Params.images }}
+    <meta name="twitter:image" content="{{ index . 0 }}" />
+  {{ else }}
+    {{ if .Site.Params.og_image }}
+      <meta name="twitter:image" content="{{ .Site.Params.og_image }}" />
+    {{ end }}
+  {{ end }}
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 </head>

@@ -1,0 +1,36 @@
+.highlight-container {
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+    overflow: hidden; /* Ensures clean borders */
+}
+
+.highlight-container .code-block-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 0.5rem;
+    border-bottom: 1px solid #495057;
+}
+
+.highlight-container .highlight pre {
+    margin: 0;
+    padding: 1rem; /* Reduced from 1.5rem to 1rem */
+    border-radius: 0;
+}
+
+.highlight-container .highlight {
+    margin: 0; /* Remove default margins */
+}
+
+.highlight-container .highlight pre {
+    margin: 0; /* Remove default margins */
+    padding: 1.5rem; /* Add more padding around code */
+    border-radius: 0; /* Remove border radius since container handles it */
+}
+
+.copy-btn:hover {
+    cursor: pointer;
+}

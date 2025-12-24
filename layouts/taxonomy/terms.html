@@ -35,13 +35,26 @@
   </div>
 
   {{/* Tag Cloud Page */}} {{ else if eq $taxonomies "tags" }}
+  {{ $tags := $.Site.Taxonomies.tags.ByCount }}
+  {{ if gt (len $tags) 0 }}
+  {{ $maxCount := (index $tags 0).Count }}
+  {{ $minCount := (index $tags (sub (len $tags) 1)).Count }}
+  {{ $minFont := 0.9 }}
+  {{ $maxFont := 2.0 }}
   <div class="container">
-    {{ range $.Site.Taxonomies.tags.ByCount }}
-    <a href="{{ .Page.RelPermalink }}"
+    {{ range $tags }}
+    {{ $count := .Count }}
+    {{ $scale := 0.5 }}
+    {{ if ne $maxCount $minCount }}
+    {{ $scale = div (sub (float $count) (float $minCount)) (sub (float $maxCount) (float $minCount)) }}
+    {{ end }}
+    {{ $size := add $minFont (mul $scale (sub $maxFont $minFont)) }}
+    <a href="{{ .Page.RelPermalink }}" style="font-size: {{ printf "%.2f" $size }}rem;"
       >{{ .Page.Title }} <sup>{{ .Count }}</sup></a
     >
     {{ end }}
   </div>
+  {{ end }}
   {{ end }}
 </div>
 {{ end }}
